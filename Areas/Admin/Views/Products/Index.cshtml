@@ -1,0 +1,94 @@
+﻿@model IEnumerable<DoanWeb.Models.Product>
+@*@model PagedList.IPagedList<CuaHangOto.Models.Product>
+    @using PagedList.Mvc;*@
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container-fluid">
+    <h1 class="mt-4">Product</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Admin/Chart/Index">Dashboard</a></li>
+        <li class="breadcrumb-item active">Tables</li>
+    </ol>
+
+
+    <div class="card mb-4">
+
+        <p>
+            <a href="/Admin/Products/Create" class="btn btn-success">Create New</a>
+        </p>
+
+        <div class="card-header">
+            <i class="fas fa-table mr-1"></i>
+            DataTable Example
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Category</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Model</th>
+                            <th>Time</th>
+                            <th>Origin</th>
+                            <th>Decription</th>
+                            <th>Image</th>
+                            <th>Color</th>
+                            <th>Seat</th>
+                            <th>Fuel</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Category.nameCategory</td>
+                                <td>@item.idProduct</td>
+                                <td>@item.nameProduct</td>
+                                <td>@item.priceProduct</td>
+
+                                <td>@item.modelProduct</td>
+                                <td>@item.timeProduction</td>
+                                <td>@item.originProduct</td>
+                                <td>@item.descriptionProduct</td>
+                                <td>@item.urlImageProduct</td>
+
+                                <td>@item.color</td>
+
+                                <td>@item.seat</td>
+
+                                <td>@item.fuel</td>
+
+                                <td>
+                                    @*@Html.ActionLink("Edit", "Edit", new { id = item.idProduct }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.idProduct }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.idProduct })*@
+                                    <a href="/Admin/Products/Edit/@item.idProduct"><i class="fa fa-edit" style="width:20px;height:20px;color:green"></i></a>
+                                    <a href="/Admin/Products/Details/@item.idProduct"><i class="fa fa-table" style="width:20px;height:20px;color:red"></i></a>
+                                    <a href="/Admin/Products/Delete/@item.idProduct"><i class="fa fa-trash" style="width:20px;height:20px;color:orangered"></i></a>
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+                @*Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

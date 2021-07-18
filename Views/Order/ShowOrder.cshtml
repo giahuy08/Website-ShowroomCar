@@ -1,0 +1,125 @@
+﻿@model DoanWeb.Models.Order
+
+@{
+    ViewBag.Title = "ShowOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/Themes/Home/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Cars <i class="ion-ios-arrow-forward"></i></span></p>
+                <h1 class="mb-3 bread">Order</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+@if (Model != null)
+{
+    <table style="border-collapse:separate;border-spacing:20px;" class="table-responsive">
+        <thead class="thead-dark">
+            <tr>
+                <th>Product name</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Sum</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                double total = Convert.ToDouble(item.product.priceProduct * item.quantity);
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.product.nameProduct)
+                    </td>
+                    <td>
+                        <img src="~/@item.product.urlImageProduct" style="width:100px; height:100px;" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.product.priceProduct)
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("Update_Quantity", "Order"))
+                        {
+                            <input type="hidden" value="@item.product.idProduct" name="id_product" />
+                            <input type="number" value="@item.quantity" name="Quantity" />
+                            <input type="submit" value="Update" />
+                        }
+
+                    </td>
+                    <td>
+                        @total
+                    </td>
+                    <td><a href="/Order/DeleteOrder/@item.product.idProduct"><i class="icon-trash" style="width:30px;height:20px"></i></a></td>
+                </tr>
+
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" style="text-align:right;color:black">Sum Total:@Model.Total()</td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <td colspan="4" style="text-align:center;">
+                    @if (Session["UserAdmin"].Equals(""))
+                    {
+                        <p style="color:black">You have to Sign In to Order</p>
+                        <p>Bạn có tài khoản chưa ?</p> <p class="btn btn-block">Hãy Đăng nhập ở trên </p>
+
+                        <p>Nếu bạn chưa có tài khoản ?</p>
+                        <div class="btn btn--green"><a href="/User/SignUp">Sign Up</a></div>
+                    }
+                    else
+                    {
+
+
+                        using (Html.BeginForm("Checkout", "Order"))
+                        {
+                            <table style="border-collapse:separate;border-spacing:5px;">
+                                @*<tr>
+                                <td>Code</td>
+                                <td>
+                                    <input type="number" name="CodeCus" required />
+                                </td>
+                            </tr>*@
+                                <tr>
+                                    <td>Ngày lái thử</td>
+                                    <td>
+                                        <input type="date" name="Date" required />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Địa chỉ đặt lịch tại TP Hồ Chí Minh
+                                    </td>
+                                    <td>
+                                        <input type="text" name="Address" />
+                                    </td>
+                                    <td></td>
+
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><input type="submit" value="Đặt ngay" class="btn btn-success" required /></td>
+                                </tr>
+                            </table>
+                        }
+                    }
+                </td>
+            </tr>
+        </tfoot>
+
+    </table>
+
+
+
+}

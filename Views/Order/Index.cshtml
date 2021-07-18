@@ -1,0 +1,35 @@
+﻿@model List<DoanWeb.Models.Order>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table-bordered">
+    <thead>
+        <tr>
+            <td>ID Product</td>
+            <td>Name</td>
+            <td>Image</td>
+            <td>Quantity</td>
+            <td>Price</td>
+            <td>Sum</td>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Product.idProduct</td>
+                <td>@item.Product.nameProduct</td>
+                <td><img src="/@item.Product.urlImageProduct" style="width:100px;height:100px;"/></td>
+                <td><input type="text" class="Quantity" value="@item.Quantity"/></td>
+                <td>@item.Product.priceProduct</td>
+                <td>@(item.Product.priceProduct*item.Quantity)</td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+

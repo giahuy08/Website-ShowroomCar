@@ -1,0 +1,180 @@
+﻿@model  DoanWeb.Models.Product
+@using DoanWeb.Models
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+      IEnumerable<Product> listother = ViewBag.other as IEnumerable<Product>;
+
+}
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/Themes/Home/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Car details <i class="ion-ios-arrow-forward"></i></span></p>
+                <h1 class="mb-3 bread">Car Details</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="ftco-section ftco-car-details">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="car-details">
+                    <div class="img rounded" style=" background-image: url('/@Model.urlImageProduct');"></div>
+                    <div class="text text-center">
+                        <span class="subheading">@Model.Category.nameCategory</span>
+                        <h2>@Model.nameProduct</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="row">
+            <div class="col-md d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services">
+                    <div class="media-body py-md-4">
+                        <div class="d-flex mb-3 align-items-center">
+                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-dashboard"></span></div>
+                            <div class="text">
+                                <h3 class="heading mb-0 pl-3">
+                                    Kiểu dáng
+                                    <span>@Model.modelProduct</span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        <div class="row">
+            <div class="col-md d-flex align-self-stretch ftco-animate">
+                <div class="media block-6 services">
+                    <div class="media-body py-md-4">
+                        <div class="d-flex mb-3 align-items-center">
+                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-handshake"></span></div>
+                            <div class="text">
+                                <h3 class="heading mb-0 pl-3">
+                                    Màu sắc
+                                    <span>@Model.color</span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="row">*@
+                <div class="col-md d-flex align-self-stretch ftco-animate">
+                    <div class="media block-6 services">
+                        <div class="media-body py-md-4">
+                            <div class="d-flex mb-3 align-items-center">
+                                <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-rent"></span></div>
+                                <div class="text">
+                                    <h3 class="heading mb-0 pl-3">
+                                        Kiểu dáng
+                                        <span>@Model.modelProduct</span>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-md d-flex align-self-stretch ftco-animate">
+                        <div class="media block-6 services">
+                            <div class="media-body py-md-4">
+                                <div class="d-flex mb-3 align-items-center">
+                                    <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-pistons"></span></div>
+                                    <div class="text">
+                                        <h3 class="heading mb-0 pl-3">
+                                            Transmission
+                                            <span>Manual</span>
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                <div class="col-md d-flex align-self-stretch ftco-animate">
+                    <div class="media block-6 services">
+                        <div class="media-body py-md-4">
+                            <div class="d-flex mb-3 align-items-center">
+                                <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-car-seat"></span></div>
+                                <div class="text">
+                                    <h3 class="heading mb-0 pl-3">
+                                        Chỗ
+                                        <span>@Model.seat Adults</span>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md d-flex align-self-stretch ftco-animate">
+                    <div class="media block-6 services">
+                        <div class="media-body py-md-4">
+                            <div class="d-flex mb-3 align-items-center">
+                                <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-backpack"></span></div>
+                                <div class="text">
+                                    <h3 class="heading mb-0 pl-3">
+                                        Năm sản xuất
+                                        <span>@Model.timeProduction</span>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md d-flex align-self-stretch ftco-animate">
+                    <div class="media block-6 services">
+                        <div class="media-body py-md-4">
+                            <div class="d-flex mb-3 align-items-center">
+                                <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-diesel"></span></div>
+                                <div class="text">
+                                    <h3 class="heading mb-0 pl-3">
+                                        Nhiên liệu
+                                        <span>@Model.fuel</span>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pills">
+                    <div class="bd-example bd-example-tabs">
+                        <div class="d-flex justify-content-center">
+                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-expanded="true">Decription</a>
+                                </li>
+                                @*<li class="nav-item">
+                                        <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill" href="#pills-manufacturer" role="tab" aria-controls="pills-manufacturer" aria-expanded="true">Description</a>
+                                    </li>*@
+                                @*<li class="nav-item">
+                                        <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-expanded="true">Review</a>
+                                    </li>*@
+                            </ul>
+                        </div>
+
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+                                @Model.descriptionProduct
+
+                            </div>
+
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @*</div>*@
+</section>
+@Html.Partial("~/Views/Products/OtherCar.cshtml",listother)

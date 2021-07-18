@@ -1,0 +1,31 @@
+﻿@model DoanWeb.Models.RoleAccount
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div id="layoutSidenav_content">
+    <main>
+
+        <h2>Details</h2>
+
+        <div>
+            <h4>RoleAccount</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.roleName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.roleName)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.idroleAccount }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+        </main>
+</div>

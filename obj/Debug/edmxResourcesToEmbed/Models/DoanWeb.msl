@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DoanWebModelStoreContainer" CdmEntityContainer="DoanWebEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="DoanWebModel.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Pass" ColumnName="Pass" />
+          <ScalarProperty Name="iduser" ColumnName="iduser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="DoanWebModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+          <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetailOrders">
+      <EntityTypeMapping TypeName="DoanWebModel.DetailOrder">
+        <MappingFragment StoreEntitySet="DetailOrder">
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderProducts">
+      <EntityTypeMapping TypeName="DoanWebModel.OrderProduct">
+        <MappingFragment StoreEntitySet="OrderProduct">
+          <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+          <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+          <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+          <ScalarProperty Name="Decription" ColumnName="Decription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="DoanWebModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+          <ScalarProperty Name="idCategoryProduct" ColumnName="idCategoryProduct" />
+          <ScalarProperty Name="nameProduct" ColumnName="nameProduct" />
+          <ScalarProperty Name="priceProduct" ColumnName="priceProduct" />
+          <ScalarProperty Name="modelProduct" ColumnName="modelProduct" />
+          <ScalarProperty Name="timeProduction" ColumnName="timeProduction" />
+          <ScalarProperty Name="originProduct" ColumnName="originProduct" />
+          <ScalarProperty Name="descriptionProduct" ColumnName="descriptionProduct" />
+          <ScalarProperty Name="urlImageProduct" ColumnName="urlImageProduct" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="seat" ColumnName="seat" />
+          <ScalarProperty Name="fuel" ColumnName="fuel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleAccounts">
+      <EntityTypeMapping TypeName="DoanWebModel.RoleAccount">
+        <MappingFragment StoreEntitySet="RoleAccount">
+          <ScalarProperty Name="idroleAccount" ColumnName="idroleAccount" />
+          <ScalarProperty Name="roleName" ColumnName="roleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_info">
+      <EntityTypeMapping TypeName="DoanWebModel.User_info">
+        <MappingFragment StoreEntitySet="User_info">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="nameUser" ColumnName="nameUser" />
+          <ScalarProperty Name="birthUser" ColumnName="birthUser" />
+          <ScalarProperty Name="sexUser" ColumnName="sexUser" />
+          <ScalarProperty Name="phoneNumberUser" ColumnName="phoneNumberUser" />
+          <ScalarProperty Name="emailUser" ColumnName="emailUser" />
+          <ScalarProperty Name="addressUser" ColumnName="addressUser" />
+          <ScalarProperty Name="roleAccount" ColumnName="roleAccount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

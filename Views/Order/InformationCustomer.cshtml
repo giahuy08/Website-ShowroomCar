@@ -1,0 +1,96 @@
+﻿@*@model DoanWeb.Models.Account*@
+@using DoanWeb.Models
+@{
+    ViewBag.Title = "InformationCustomer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    Account account = ViewBag.account as Account;
+    User_info cusinfo = ViewBag.infoCus as User_info;
+    OrderProduct cusorder = ViewBag.order as OrderProduct;
+    DetailOrder detailorder = ViewBag.orderdetail as DetailOrder;
+    Product product = ViewBag.product as Product;
+
+}
+
+
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/Themes/Home/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Profile <i class="ion-ios-arrow-forward"></i></span></p>
+                <h1 class="mb-3 bread">Profile</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<br />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container padding-bottom-3x mb-2">
+    <div class="row">
+        <div class="col-lg-4">
+            <aside class="user-info-wrapper">
+                <div class="user-cover" style="background-image: url(https://bootdey.com/img/Content/bg1.jpg);">
+                    @*<div class="info-label" data-toggle="tooltip" title="" data-original-title="You currently have 290 Reward Points to spend"><i class="icon-medal"></i>290 points</div>*@
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <a class="edit-avatar" href="#"></a><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User">
+                    </div>
+                    <div class="user-data">
+                        <h4>@cusinfo.nameUser</h4><span>Profile</span> <a href="/User/ChangeInfo/@Session["ID"]"><i class="icon-pencil"></i></a>
+                    </div>
+                </div>
+            </aside>
+            <nav class="list-group">
+                @*<a class="list-group-item with-badge" href="#"><i class="fa fa-th"></i>Orders<span class="badge badge-primary badge-pill">6</span></a>*@
+                <a class="list-group-item" href="#"><i class="icon-add_location"></i>@cusinfo.addressUser</a>
+                <a class="list-group-item" href="#"><i class="icon-birthday-cake"></i> @cusinfo.birthUser</a>
+                <a class="list-group-item" href="#"><i class="icon-contact_mail"></i>@cusinfo.emailUser</a>
+                <a class="list-group-item" href="#"><i class="ion-ios-man"></i>@cusinfo.sexUser</a>
+                <a class="list-group-item" href="#"><i class="icon-phone"></i>@cusinfo.phoneNumberUser</a>
+
+            </nav>
+        </div>
+        @if (cusorder != null)
+        {
+            <div class="col-lg-8">
+                <div class="padding-top-2x mt-2 hidden-lg-up"></div>
+                <div class="table-responsive margin-bottom-2x">
+                    <table class="table margin-bottom-none">
+                        <thead>
+                            <tr>
+                                <th>Ngày lái thử</th>
+                                <th>Địa điểm</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@cusorder.createdDate</td>
+                                <td>@cusorder.Decription</td>
+
+                                @*<td><span class="text-warning">High</span></td>
+                                    <td><span class="text-primary">Open</span></td>*@
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="media d-block d-sm-flex text-center text-sm-left">
+                    <a class="cart-item-thumb mx-auto mr-sm-4" href="#"><img src="/@product.urlImageProduct" alt="Product" style="width:300px;height:300px"></a>
+                    <div class="media-body pt-3">
+                        <h3 class="product-card-title font-weight-semibold border-0 pb-0"><a href="#">@product.nameProduct</a></h3>
+                        <div class="font-size-sm"><span class="text-muted mr-2">Model:</span>@product.modelProduct</div>
+                        <div class="font-size-sm"><span class="text-muted mr-2">Color:</span>@product.color</div>
+                        <div class="font-size-lg text-primary pt-2">@product.priceProduct <span style="color:black">VND</span> </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>

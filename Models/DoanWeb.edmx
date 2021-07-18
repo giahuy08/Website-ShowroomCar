@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DoanWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="Pass" Type="char" MaxLength="30" />
+          <Property Name="iduser" Type="int" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="idCategory" />
+          </Key>
+          <Property Name="idCategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameCategory" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetailOrder">
+          <Key>
+            <PropertyRef Name="idProduct" />
+            <PropertyRef Name="idOrder" />
+          </Key>
+          <Property Name="idProduct" Type="int" Nullable="false" />
+          <Property Name="idOrder" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="OrderProduct">
+          <Key>
+            <PropertyRef Name="idOrder" />
+          </Key>
+          <Property Name="idOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCustomer" Type="int" />
+          <Property Name="createdDate" Type="datetime" />
+          <Property Name="Decription" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="idProduct" />
+          </Key>
+          <Property Name="idProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCategoryProduct" Type="int" Nullable="false" />
+          <Property Name="nameProduct" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="priceProduct" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="modelProduct" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="timeProduction" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="originProduct" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="descriptionProduct" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="urlImageProduct" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="color" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="seat" Type="int" Nullable="false" />
+          <Property Name="fuel" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleAccount">
+          <Key>
+            <PropertyRef Name="idroleAccount" />
+          </Key>
+          <Property Name="idroleAccount" Type="int" Nullable="false" />
+          <Property Name="roleName" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="User_info">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nameUser" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="birthUser" Type="datetime" />
+          <Property Name="sexUser" Type="nvarchar" MaxLength="5" />
+          <Property Name="phoneNumberUser" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="emailUser" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="addressUser" Type="nvarchar" MaxLength="100" />
+          <Property Name="roleAccount" Type="int" />
+        </EntityType>
+        <Association Name="FK__Account__iduser__20C1E124">
+          <End Role="User_info" Type="Self.User_info" Multiplicity="0..1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_info">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="iduser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetailOrd__idOrd__1DE57479">
+          <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="1" />
+          <End Role="DetailOrder" Type="Self.DetailOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderProduct">
+              <PropertyRef Name="idOrder" />
+            </Principal>
+            <Dependent Role="DetailOrder">
+              <PropertyRef Name="idOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetailOrd__idPro__1CF15040">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="DetailOrder" Type="Self.DetailOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="DetailOrder">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderProd__idCus__1A14E395">
+          <End Role="User_info" Type="Self.User_info" Multiplicity="0..1" />
+          <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_info">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="idCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__idCateg__1273C1CD">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="idCategory" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="idCategoryProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_info__roleA__173876EA">
+          <End Role="RoleAccount" Type="Self.RoleAccount" Multiplicity="0..1" />
+          <End Role="User_info" Type="Self.User_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleAccount">
+              <PropertyRef Name="idroleAccount" />
+            </Principal>
+            <Dependent Role="User_info">
+              <PropertyRef Name="roleAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DoanWebModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetailOrder" EntityType="Self.DetailOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleAccount" EntityType="Self.RoleAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_info" EntityType="Self.User_info" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Account__iduser__20C1E124" Association="Self.FK__Account__iduser__20C1E124">
+            <End Role="User_info" EntitySet="User_info" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetailOrd__idOrd__1DE57479" Association="Self.FK__DetailOrd__idOrd__1DE57479">
+            <End Role="OrderProduct" EntitySet="OrderProduct" />
+            <End Role="DetailOrder" EntitySet="DetailOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetailOrd__idPro__1CF15040" Association="Self.FK__DetailOrd__idPro__1CF15040">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="DetailOrder" EntitySet="DetailOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderProd__idCus__1A14E395" Association="Self.FK__OrderProd__idCus__1A14E395">
+            <End Role="User_info" EntitySet="User_info" />
+            <End Role="OrderProduct" EntitySet="OrderProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__idCateg__1273C1CD" Association="Self.FK__Product__idCateg__1273C1CD">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_info__roleA__173876EA" Association="Self.FK__User_info__roleA__173876EA">
+            <End Role="RoleAccount" EntitySet="RoleAccount" />
+            <End Role="User_info" EntitySet="User_info" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DoanWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" MaxLength="30" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Pass" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="iduser" Type="Int32" />
+          <NavigationProperty Name="User_info" Relationship="Self.FK__Account__iduser__20C1E124" FromRole="Account" ToRole="User_info" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="idCategory" />
+          </Key>
+          <Property Name="idCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__idCateg__1273C1CD" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="DetailOrder">
+          <Key>
+            <PropertyRef Name="idProduct" />
+            <PropertyRef Name="idOrder" />
+          </Key>
+          <Property Name="idProduct" Type="Int32" Nullable="false" />
+          <Property Name="idOrder" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="OrderProduct" Relationship="Self.FK__DetailOrd__idOrd__1DE57479" FromRole="DetailOrder" ToRole="OrderProduct" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__DetailOrd__idPro__1CF15040" FromRole="DetailOrder" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="OrderProduct">
+          <Key>
+            <PropertyRef Name="idOrder" />
+          </Key>
+          <Property Name="idOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCustomer" Type="Int32" />
+          <Property Name="createdDate" Type="DateTime" Precision="3" />
+          <Property Name="Decription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DetailOrders" Relationship="Self.FK__DetailOrd__idOrd__1DE57479" FromRole="OrderProduct" ToRole="DetailOrder" />
+          <NavigationProperty Name="User_info" Relationship="Self.FK__OrderProd__idCus__1A14E395" FromRole="OrderProduct" ToRole="User_info" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="idProduct" />
+          </Key>
+          <Property Name="idProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCategoryProduct" Type="Int32" Nullable="false" />
+          <Property Name="nameProduct" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="priceProduct" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="modelProduct" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="timeProduction" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="originProduct" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descriptionProduct" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="urlImageProduct" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="color" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="seat" Type="Int32" Nullable="false" />
+          <Property Name="fuel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Product__idCateg__1273C1CD" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="DetailOrders" Relationship="Self.FK__DetailOrd__idPro__1CF15040" FromRole="Product" ToRole="DetailOrder" />
+        </EntityType>
+        <EntityType Name="RoleAccount">
+          <Key>
+            <PropertyRef Name="idroleAccount" />
+          </Key>
+          <Property Name="idroleAccount" Type="Int32" Nullable="false" />
+          <Property Name="roleName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User_info" Relationship="Self.FK__User_info__roleA__173876EA" FromRole="RoleAccount" ToRole="User_info" />
+        </EntityType>
+        <EntityType Name="User_info">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nameUser" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="birthUser" Type="DateTime" Precision="3" />
+          <Property Name="sexUser" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="phoneNumberUser" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="emailUser" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="addressUser" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="roleAccount" Type="Int32" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__iduser__20C1E124" FromRole="User_info" ToRole="Account" />
+          <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__idCus__1A14E395" FromRole="User_info" ToRole="OrderProduct" />
+          <NavigationProperty Name="RoleAccount1" Relationship="Self.FK__User_info__roleA__173876EA" FromRole="User_info" ToRole="RoleAccount" />
+        </EntityType>
+        <Association Name="FK__Account__iduser__20C1E124">
+          <End Role="User_info" Type="Self.User_info" Multiplicity="0..1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_info">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="iduser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__idCateg__1273C1CD">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="idCategory" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="idCategoryProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetailOrd__idOrd__1DE57479">
+          <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="1" />
+          <End Role="DetailOrder" Type="Self.DetailOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderProduct">
+              <PropertyRef Name="idOrder" />
+            </Principal>
+            <Dependent Role="DetailOrder">
+              <PropertyRef Name="idOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetailOrd__idPro__1CF15040">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="DetailOrder" Type="Self.DetailOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="idProduct" />
+            </Principal>
+            <Dependent Role="DetailOrder">
+              <PropertyRef Name="idProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderProd__idCus__1A14E395">
+          <End Role="User_info" Type="Self.User_info" Multiplicity="0..1" />
+          <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_info">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="idCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User_info__roleA__173876EA">
+          <End Role="RoleAccount" Type="Self.RoleAccount" Multiplicity="0..1" />
+          <End Role="User_info" Type="Self.User_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleAccount">
+              <PropertyRef Name="idroleAccount" />
+            </Principal>
+            <Dependent Role="User_info">
+              <PropertyRef Name="roleAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DoanWebEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="DetailOrders" EntityType="Self.DetailOrder" />
+          <EntitySet Name="OrderProducts" EntityType="Self.OrderProduct" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="RoleAccounts" EntityType="Self.RoleAccount" />
+          <EntitySet Name="User_info" EntityType="Self.User_info" />
+          <AssociationSet Name="FK__Account__iduser__20C1E124" Association="Self.FK__Account__iduser__20C1E124">
+            <End Role="User_info" EntitySet="User_info" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__idCateg__1273C1CD" Association="Self.FK__Product__idCateg__1273C1CD">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetailOrd__idOrd__1DE57479" Association="Self.FK__DetailOrd__idOrd__1DE57479">
+            <End Role="OrderProduct" EntitySet="OrderProducts" />
+            <End Role="DetailOrder" EntitySet="DetailOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetailOrd__idPro__1CF15040" Association="Self.FK__DetailOrd__idPro__1CF15040">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="DetailOrder" EntitySet="DetailOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderProd__idCus__1A14E395" Association="Self.FK__OrderProd__idCus__1A14E395">
+            <End Role="User_info" EntitySet="User_info" />
+            <End Role="OrderProduct" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User_info__roleA__173876EA" Association="Self.FK__User_info__roleA__173876EA">
+            <End Role="RoleAccount" EntitySet="RoleAccounts" />
+            <End Role="User_info" EntitySet="User_info" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DoanWebModelStoreContainer" CdmEntityContainer="DoanWebEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="DoanWebModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="iduser" ColumnName="iduser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="DoanWebModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="idCategory" ColumnName="idCategory" />
+                <ScalarProperty Name="nameCategory" ColumnName="nameCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetailOrders">
+            <EntityTypeMapping TypeName="DoanWebModel.DetailOrder">
+              <MappingFragment StoreEntitySet="DetailOrder">
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderProducts">
+            <EntityTypeMapping TypeName="DoanWebModel.OrderProduct">
+              <MappingFragment StoreEntitySet="OrderProduct">
+                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="Decription" ColumnName="Decription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="DoanWebModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="idProduct" ColumnName="idProduct" />
+                <ScalarProperty Name="idCategoryProduct" ColumnName="idCategoryProduct" />
+                <ScalarProperty Name="nameProduct" ColumnName="nameProduct" />
+                <ScalarProperty Name="priceProduct" ColumnName="priceProduct" />
+                <ScalarProperty Name="modelProduct" ColumnName="modelProduct" />
+                <ScalarProperty Name="timeProduction" ColumnName="timeProduction" />
+                <ScalarProperty Name="originProduct" ColumnName="originProduct" />
+                <ScalarProperty Name="descriptionProduct" ColumnName="descriptionProduct" />
+                <ScalarProperty Name="urlImageProduct" ColumnName="urlImageProduct" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="seat" ColumnName="seat" />
+                <ScalarProperty Name="fuel" ColumnName="fuel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleAccounts">
+            <EntityTypeMapping TypeName="DoanWebModel.RoleAccount">
+              <MappingFragment StoreEntitySet="RoleAccount">
+                <ScalarProperty Name="idroleAccount" ColumnName="idroleAccount" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_info">
+            <EntityTypeMapping TypeName="DoanWebModel.User_info">
+              <MappingFragment StoreEntitySet="User_info">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="nameUser" ColumnName="nameUser" />
+                <ScalarProperty Name="birthUser" ColumnName="birthUser" />
+                <ScalarProperty Name="sexUser" ColumnName="sexUser" />
+                <ScalarProperty Name="phoneNumberUser" ColumnName="phoneNumberUser" />
+                <ScalarProperty Name="emailUser" ColumnName="emailUser" />
+                <ScalarProperty Name="addressUser" ColumnName="addressUser" />
+                <ScalarProperty Name="roleAccount" ColumnName="roleAccount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

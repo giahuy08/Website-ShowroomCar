@@ -1,0 +1,82 @@
+﻿@model IEnumerable<DoanWeb.Models.Account>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+
+    <h1 class="mt-4"> Category</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="Admin/Chart/Index">Dashboard</a></li>
+        <li class="breadcrumb-item active">Account</li>
+    </ol>
+
+    <div class="card mb-4">
+        <p>
+            <a href="/Admin/Categories/Create" class="btn btn-success">Create New</a>
+        </p>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID User</th>
+                            <th>UserName</th>
+                            <th>Password</th>
+                            <th>Role</th>
+                            <th>Action</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.iduser</td>
+                                <td>@item.Username</td>
+
+
+                                <td>@item.Pass</td>
+                                <td>@item.User_info.RoleAccount1.roleName</td>
+
+                                <td>
+
+                                    <a href="/Admin/Accounts/Edit/@item.Username"><i class="fa fa-edit" style="width:20px;height:20px;color:green"></i></a>
+                                    <a href="/Admin/Accounts/Details/@item.Username"><i class="fa fa-table" style="width:20px;height:20px;color:red"></i></a>
+                                    <a href="/Admin/Accounts/Delete/@item.Username"><i class="fa fa-trash" style="width:20px;height:20px;color:orangered"></i></a>
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

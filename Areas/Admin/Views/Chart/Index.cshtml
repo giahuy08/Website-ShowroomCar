@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mt-4">Dashboard</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Dashboard</li>
+</ol>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-chart-area mr-1"></i>
+                BarChart
+            </div>
+            <div class="card-body"><canvas id="bar_chart" style="width:100px;height:100px"></canvas></div>
+
+            <div class="card-header">
+                <i class="fas fa-chart-area mr-1"></i>
+                PieChart
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="card-body"><canvas id="pie_chart" style="width:300px;height:300px"></canvas></div>
+@*<div id="chart_container">
+        <canvas id="bar_chart">
+        </canvas>
+    </div>*@
+<script>
+        var category = @Html.Raw(Json.Encode(ViewBag.category));
+        var soluongFord = @Html.Raw(Json.Encode(ViewBag.soluongFord));
+        var soluongKIA = @Html.Raw(Json.Encode(ViewBag.soluongKIA));
+
+        var ctx = $("#bar_chart");
+        var bacChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels:["thống kê"],
+                datasets: [{
+                    label: category[0],
+                    data: soluongFord,
+                    backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 20, 132, 0.2)", "rgba(10, 162, 235, 0.2)"],
+                    borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
+                    borderWidth: 1
+                }
+                    , {
+                        label: category[1],
+                        data: soluongKIA,
+                        backgroundColor: ["rgba(54, 162, 235, 0.2)", "rgba(255, 20, 132, 0.2)", "rgba(10, 162, 235, 0.2)"],
+                        borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
+                        borderWidth: 1
+                    }
+                ]
+
+
+
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Thống kê số lượng xe theo hãng'
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1
+                        }
+                    }]
+                }
+            }
+
+
+        });
+
+
+</script>
+
+

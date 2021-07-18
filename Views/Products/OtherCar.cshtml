@@ -1,0 +1,39 @@
+﻿
+@model IEnumerable<DoanWeb.Models.Product>
+
+
+<section class="ftco-section ftco-no-pt">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+                <span class="subheading">Choose Car</span>
+                <h2 class="mb-2">Related Cars</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            @foreach (var item in Model.Take(3))
+            {
+                
+                    <div class="col-md-4">
+                        <div class="car-wrap rounded ftco-animate">
+                            <div class="img rounded d-flex align-items-end" style="background-image: url('/@item.urlImageProduct');">
+                            </div>
+                            <div class="text">
+                                <h2 class="mb-0"><a href="car-single.html">Mercedes Grand Sedan</a></h2>
+                                <div class="d-flex mb-3">
+                                    <span class="cat">@item.nameProduct</span>
+                                    <p class="price ml-auto">@item.priceProduct <span>VND</span></p>
+                                </div>
+                                <p class="d-flex mb-0 d-block"><a href="/Order/AddtoOrder/@item.idProduct" class="btn btn-primary py-2 mr-1">Buy Now</a> <a href="@Url.Action("Details", "Products", new { id = item.idProduct })" class="btn btn-secondary py-2 ml-1">Details</a></p>
+                            </div>
+                        </div>
+                    </div>
+                
+            }
+        </div>
+    </div>
+</section>
+
+
+

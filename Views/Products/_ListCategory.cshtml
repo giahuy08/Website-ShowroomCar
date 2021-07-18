@@ -1,0 +1,10 @@
+﻿@model IEnumerable<DoanWeb.Models.Category>
+<h3>Danh mục loại</h3>
+<ul>
+    @foreach (var cat in Model.Count)
+    {
+        <li><a href="">@cat.nameCategory</a></li>
+    }
+    
+</ul>
+

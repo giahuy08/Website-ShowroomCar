@@ -1,0 +1,9 @@
+﻿@model IEnumerable<DoanWeb.Models.Product>
+<section class="" hero-wrap hero-wrap-2 js-fullheight">
+    <div style="text-align:center">
+        @using (Html.BeginForm("ListProduct", "Products", FormMethod.Get))
+        {
+            @Html.TextBox("SearchName") <input type="submit" value="Search" />
+        }
+    </div>
+</section>

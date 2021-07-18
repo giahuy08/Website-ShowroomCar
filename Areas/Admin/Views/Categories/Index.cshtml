@@ -1,0 +1,60 @@
+﻿@model IEnumerable<DoanWeb.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="container-fluid">
+
+    <h1 class="mt-4"> Category</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="Admin/Chart/Index">Dashboard</a></li>
+        <li class="breadcrumb-item active">Tables</li>
+    </ol>
+
+    <div class="card mb-4">
+        <p>
+            <a href="/Admin/Categories/Create" class="btn btn-success">Create New</a>
+        </p>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name Category</th>
+                            <th>Action</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.idCategory</td>
+                                <td>@item.nameCategory</td>
+
+                                <td>
+                                
+
+                                    <a href="/Admin/Categories/Edit/@item.idCategory"><i class="fa fa-edit" style="width:20px;height:20px;color:green"></i></a>
+                                    <a href="/Admin/Categories/Details/@item.idCategory"><i class="fa fa-table" style="width:20px;height:20px;color:red"></i></a>
+                                    <a href="/Admin/Categories/Delete/@item.idCategory"><i class="fa fa-trash" style="width:20px;height:20px;color:orangered"></i></a>
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+   

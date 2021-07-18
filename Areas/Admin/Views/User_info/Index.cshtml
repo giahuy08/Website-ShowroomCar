@@ -1,0 +1,74 @@
+﻿@model IEnumerable<DoanWeb.Models.User_info>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">User</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/Admin/Chart/Index">Dashboard</a></li>
+        <li class="breadcrumb-item active">Tables</li>
+    </ol>
+
+    <div class="card mb-4">
+       
+        <p>
+            <a href="/Admin/User_info/Create" class="btn btn-success">Create New</a>
+        </p>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Role</th>
+                            <th>Name</th>
+                            <th>Birthday</th>
+                            <th>Sex</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Action</th>
+                           
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.RoleAccount1.roleName</td>
+                                <td>@item.nameUser</td>
+                                <td>@item.birthUser</td>
+                                <td>@item.sexUser</td>
+                                <td>@item.phoneNumberUser</td>
+
+                                <td>@item.emailUser</td>
+                                <td>@item.addressUser</td>
+
+
+
+                                <td>
+                                    @*@Html.ActionLink("Edit", "Edit", new { id = item.idUser }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.idUser }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.idUser })*@
+
+                                    <a href="/Admin/User_info/Edit/@item.idUser"><i class="fa fa-edit" style="width:20px;height:20px;color:green"></i></a>
+                                    <a href="/Admin/User_info/Details/@item.idUser"><i class="fa fa-table" style="width:20px;height:20px;color:red"></i></a>
+                                    <a href="/Admin/User_info/Delete/@item.idUser"><i class="fa fa-trash" style="width:20px;height:20px;color:orangered"></i></a>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

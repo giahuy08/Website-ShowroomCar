@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ea9a3d01dfdf4403a3ac0406d666f2e6" Name="Diagram1">
+        <EntityTypeShape EntityType="DoanWebModel.Account" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoanWebModel.Category" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoanWebModel.DetailOrder" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoanWebModel.OrderProduct" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoanWebModel.Product" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoanWebModel.RoleAccount" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoanWebModel.User_info" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <AssociationConnector Association="DoanWebModel.FK__Account__iduser__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="DoanWebModel.FK__Product__idCateg__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="DoanWebModel.FK__DetailOrd__idOrd__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="DoanWebModel.FK__DetailOrd__idPro__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="DoanWebModel.FK__OrderProd__idCus__1A14E395" ManuallyRouted="false" />
+        <AssociationConnector Association="DoanWebModel.FK__User_info__roleA__173876EA" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
